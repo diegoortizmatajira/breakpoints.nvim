@@ -9,7 +9,7 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 - **Persistent storage** — breakpoints serialized to `stdpath("data")/breakpoints/<project_hash>.json`
 - **Per-project isolation** — project root detected via configurable markers (`pom.xml`, `package.json`, `.git`, etc.)
 - **Group metadata** — assign breakpoints to named groups (e.g. "Auth", "Payments") stored in companion `.meta.json`
-- **Auto-save** — `VimLeave` + `DirChanged` autocmds, plus hooks on `dap.toggle_breakpoint()` / `set_breakpoint()` / `clear_breakpoints()`
+- **Auto-save** — `VimLeave` + `DirChanged` + `SessionLoadPost` autocmds, plus hooks on `dap.toggle_breakpoint()` / `set_breakpoint()` / `clear_breakpoints()`
 - **Picker UI** — browse all breakpoints with file preview, jump-to-location, inline editing (condition, log, hit count, group)
 - **Type-aware icons** — `●` normal, `◆` conditional, `◉` logpoint, `◇` hit condition
 
@@ -18,6 +18,7 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 - Neovim ≥ 0.10
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [picker.nvim](https://github.com/lcampoverde/picker.nvim) (for the picker UI)
+- Optional: [vim-obsession](https://github.com/tpope/vim-obsession) for automatic `Session.vim` restore flows.
 
 ## Installation
 

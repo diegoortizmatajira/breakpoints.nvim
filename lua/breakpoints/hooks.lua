@@ -65,6 +65,15 @@ function M.setup(opts)
   if opts.load ~= false then
     vim.schedule(persistence.load)
   end
+
+  vim.api.nvim_create_autocmd("SessionLoadPost", {
+    group = group,
+    callback = function()
+      state.active_project_key = storage.project_key()
+      persistence.load({ key = state.active_project_key })
+    end,
+    desc = "Load breakpoints after session restore",
+  })
 end
 
 return M
