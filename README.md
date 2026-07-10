@@ -17,7 +17,7 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 
 - Neovim ≥ 0.10
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
-- [picker.nvim](https://github.com/lcampoverde/picker.nvim) (for the picker UI)
+- A picker for the picker UI — either [picker.nvim](https://github.com/lcampoverde/picker.nvim) or [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim). Whichever is installed is detected automatically; if both are present, `picker.nvim` is used unless `picker` is configured explicitly (see [Configuration](#configuration)).
 - Optional: [vim-obsession](https://github.com/tpope/vim-obsession) for automatic `Session.vim` restore flows.
 
 ## Installation
@@ -33,6 +33,17 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 }
 ```
 
+Using Telescope instead:
+
+```lua
+{
+  "lcampoverde/breakpoints.nvim",
+  dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
+  event = "VeryLazy",
+  opts = {},
+}
+```
+
 ### Custom opts example
 
 ```lua
@@ -43,6 +54,7 @@ Breakpoints survive across sessions — automatically saved on exit and restored
   opts = {
     markers = { "pom.xml", "build.gradle", "package.json", ".git" },
     storage_dir = vim.fn.stdpath("data") .. "/breakpoints",
+    picker = "auto", -- "auto" | "picker.nvim" | "telescope"
     on_setup = function()
       -- Called once after setup completes (e.g. define DAP signs)
     end,
@@ -63,6 +75,7 @@ require("breakpoints").setup({})
 |--------|------|---------|-------------|
 | `markers` | `string[]` | `{"mvnw","pom.xml","build.gradle","build.gradle.kts","package.json",".git"}` | Files/dirs used to detect project root |
 | `storage_dir` | `string` | `stdpath("data") .. "/breakpoints"` | Directory for JSON persistence files |
+| `picker` | `"auto"\|"picker.nvim"\|"telescope"` | `"auto"` | Which picker backend to use. `"auto"` detects what's installed, preferring `picker.nvim` |
 | `on_setup` | `function?` | `nil` | Callback invoked once after hooks are registered |
 
 ## API

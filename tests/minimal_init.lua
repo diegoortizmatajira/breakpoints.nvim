@@ -71,3 +71,35 @@ package.loaded["picker"] = {
     table.insert(_G._test_picker_calls, { items = items, opts = opts, on_choice = on_choice })
   end,
 }
+
+-- Mock telescope.nvim (just captures the picker spec + attached mappings)
+_G._test_telescope_calls = {}
+local telescope_actions = {
+  select_default = {
+    replace = function(self, fn) self._fn = fn end,
+  },
+  close = function(_) end,
+}
+package.loaded["telescope"] = {}
+package.loaded["telescope.pickers"] = {
+  new = function(_, opts)
+    local call = { opts = opts, mappings = {} }
+    table.insert(_G._test_telescope_calls, call)
+    local map = function(_, key, fn) call.mappings[key] = fn end
+    if opts.attach_mappings then opts.attach_mappings(0, map) end
+    return {
+      find = function() call.found = true end,
+    }
+  end,
+}
+package.loaded["telescope.finders"] = {
+  new_table = function(o) return { results = o.results, entry_maker = o.entry_maker } end,
+}
+package.loaded["telescope.config"] = { values = { generic_sorter = function(_) return {} end } }
+package.loaded["telescope.previewers"] = {
+  vim_buffer_vimgrep = { new = function(_) return {} end },
+}
+package.loaded["telescope.actions"] = telescope_actions
+package.loaded["telescope.actions.state"] = {
+  get_selected_entry = function() return _G._test_telescope_selected_entry end,
+}
