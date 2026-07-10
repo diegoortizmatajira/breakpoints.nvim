@@ -17,7 +17,7 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 
 - Neovim ≥ 0.10
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
-- A picker for the picker UI — either [picker.nvim](https://github.com/lcampoverde/picker.nvim) or [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim). Whichever is installed is detected automatically; if both are present, `picker.nvim` is used unless `picker` is configured explicitly (see [Configuration](#configuration)).
+- A picker for the picker UI — either [picker.nvim](https://github.com/lenincamp/picker.nvim) or [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim). Whichever is installed is detected automatically; if both are present, `picker.nvim` is used unless `picker` is configured explicitly (see [Configuration](#configuration)).
 - Optional: [vim-obsession](https://github.com/tpope/vim-obsession) for automatic `Session.vim` restore flows.
 
 ## Installation
@@ -26,8 +26,8 @@ Breakpoints survive across sessions — automatically saved on exit and restored
 
 ```lua
 {
-  "lcampoverde/breakpoints.nvim",
-  dependencies = { "mfussenegger/nvim-dap", "lcampoverde/picker.nvim" },
+  "lenincamp/breakpoints.nvim",
+  dependencies = { "mfussenegger/nvim-dap", "lenincamp/picker.nvim" },
   event = "VeryLazy",
   opts = {},
 }
@@ -37,7 +37,7 @@ Using Telescope instead:
 
 ```lua
 {
-  "lcampoverde/breakpoints.nvim",
+  "lenincamp/breakpoints.nvim",
   dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
   event = "VeryLazy",
   opts = {},
@@ -48,8 +48,8 @@ Using Telescope instead:
 
 ```lua
 {
-  "lcampoverde/breakpoints.nvim",
-  dependencies = { "mfussenegger/nvim-dap", "lcampoverde/picker.nvim" },
+  "lenincamp/breakpoints.nvim",
+  dependencies = { "mfussenegger/nvim-dap", "lenincamp/picker.nvim" },
   event = "VeryLazy",
   opts = {
     markers = { "pom.xml", "build.gradle", "package.json", ".git" },
